@@ -8,7 +8,7 @@
   for ($i=0; $i < (count($result)) ; $i++) { 
 
     $ruta = $result[$i][0];
-    echo "<img src=\"$ruta\" border=\"1\" alt=\"Este es el ejemplo de un texto alternativo\">";
+    echo "<img src=\"$ruta\" border=\"1\" alt=\"Este es el ejemplo de un texto alternativo\" width=\"400\" height=\"300\">";
 
     $nombre = $result[$i][1];
     echo "<p>$nombre</p>";
