@@ -1,20 +1,58 @@
 CREATE DATABASE IF NOT EXISTS tienda;
 
-create TABLE productos(
-    id_producto int NOT NULL AUTO_INCREMENT,
- 	nombre varchar(50) NOT NULL,
-    descripcion varchar(150),
-    ruta varchar(50),
-    PRIMARY KEY(id_producto)
- );
+CREATE TABLE IF NOT EXISTS PRODUCTOS(
+		id_productos int NOT NULL AUTO_INCREMENT, 
+		nombre varchar(30) NOT NULL,
+		stock int NOT NULL,
+		ruta VARCHAR(50) NOT NULL,
+		descripcion varchar(60) NOT NULL,
+		precio int NOT NULL,
+		primary key (id_productos)
+	);
 
-INSERT INTO productos(nombre,descripcion,ruta) VALUES ("funko1","funko muy bonito","imagenes/perro1")
+CREATE TABLE IF NOT EXISTS USUARIOS(
+		correo varchar(30) NOT NULL, 
+		nombre varchar(30) NOT NULL,
+		surname_1 VARCHAR(30),
+		surname_2 VARCHAR(30),
+		contrasenia varchar(50) NOT NULL,
+		DNI varchar(9) NOT NULL,
+		primary key (correo)
+	);
 
- CREATE TABLE usuarios(
-    nombre varchar(25),
-    surname_1 varchar(25),
-    surname_2 varchar(25),
-    contra varchar(200),
-    email varchar(50),
-    PRIMARY KEY(nombre,contra)
- );
+CREATE TABLE IF NOT EXISTS ROLES(
+		id int NOT NULL AUTO_INCREMENT, 
+		tipo varchar(7) NOT NULL,
+		primary key (id)
+	);
+
+CREATE TABLE IF NOT EXISTS USUARIOS_ROLES(
+		correo varchar(30) NOT NULL, 
+		idR int NOT NULL,
+		primary key ( correo,idR),
+		FOREIGN KEY (correo) REFERENCES usuarios(correo),
+		FOREIGN KEY (idR) REFERENCES ROLES(id)
+	);
+
+CREATE TABLE IF NOT EXISTS PEDIDOS(
+    	id_pedido int NOT NULL AUTO_INCREMENT,
+    	calle varchar(50) NOT NULL,
+    	detalle_calle varchar(50),
+    	ciudad varchar(20) NOT NULL,
+    	provincia varchar(20) NOT NULL,
+    	postal_code int NOT NULL,
+    	precio_t INT,
+    	PRIMARY KEY(id_pedido)
+    );
+
+CREATE TABLE IF NOT EXISTS REL_PEDIDOS_CLIENTES_PRODUCTOS(
+	id_rel int NOT NULL AUTO_INCREMENT,
+	id_pedido int NOT NULL,
+	correo int NOT NULL,
+	id_producto int NOT NULL,
+	cantidad_products int default=1
+	PRIMARY KEY(id_rel),
+	FOREIGN KEY (id_pedido) REFERENCES PEDIDOS(id_pedido),
+	FOREIGN KEY (correo) REFERENCES USUARIOS(correo),
+	FOREIGN KEY (id_producto) REFERENCES PRODUCTOS(id_productos)
+);

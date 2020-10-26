@@ -30,7 +30,7 @@
 		public function __clone(){
 			trigger_error("La clonación no esta permitida", E_USER_ERROR);
 		}		
-		public function ruta() { 
+		public function imprimir_productos() { 
 			try{ 
 				$consulta = "select * from productos";
 				$consulta = $this->conn->prepare($consulta);		
