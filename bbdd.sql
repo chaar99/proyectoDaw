@@ -15,7 +15,7 @@ CREATE TABLE IF NOT EXISTS USUARIOS(
 		nombre varchar(30) NOT NULL,
 		surname_1 VARCHAR(30),
 		surname_2 VARCHAR(30),
-		contrasenia varchar(50) NOT NULL,
+		contrasenia varchar(150) NOT NULL,
 		DNI varchar(9) NOT NULL,
 		primary key (correo)
 	);
@@ -48,11 +48,14 @@ CREATE TABLE IF NOT EXISTS PEDIDOS(
 CREATE TABLE IF NOT EXISTS REL_PEDIDOS_CLIENTES_PRODUCTOS(
 	id_rel int NOT NULL AUTO_INCREMENT,
 	id_pedido int NOT NULL,
-	correo int NOT NULL,
+	correo varchar(30) NOT NULL,
 	id_producto int NOT NULL,
-	cantidad_products int default=1
+	cantidad_products int,
 	PRIMARY KEY(id_rel),
-	FOREIGN KEY (id_pedido) REFERENCES PEDIDOS(id_pedido),
-	FOREIGN KEY (correo) REFERENCES USUARIOS(correo),
-	FOREIGN KEY (id_producto) REFERENCES PRODUCTOS(id_productos)
+	FOREIGN KEY (id_pedido) REFERENCES pedidos(id_pedido),
+	FOREIGN KEY (correo) REFERENCES usuarios(correo),
+	FOREIGN KEY (id_producto) REFERENCES productos(id_productos)
 );
+
+INSERT INTO ROLES (tipo) VALUES("Admin");
+INSERT INTO ROLES (tipo) VALUES("Cliente");
