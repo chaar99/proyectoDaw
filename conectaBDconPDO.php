@@ -36,7 +36,7 @@
 				$consulta = $this->conn->prepare($consulta);		
 				$consulta->execute();
 
-				$resultado = $consulta->fetchAll(PDO::FETCH_NUM);
+				$resultado = $consulta->fetchAll(PDO::FETCH_OBJ);
 				return $resultado;
 			} catch (PDOException $pe){
 				die("Error al ejecutar orden select :" . $pe->getMessage());
