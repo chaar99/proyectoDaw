@@ -59,3 +59,7 @@ CREATE TABLE IF NOT EXISTS REL_PEDIDOS_CLIENTES_PRODUCTOS(
 
 INSERT INTO ROLES (tipo) VALUES("Admin");
 INSERT INTO ROLES (tipo) VALUES("Cliente");
+
+
+INSERT INTO `productos` (`id_productos`, `nombre`, `stock`, `ruta`, `descripcion`, `precio`) VALUES (NULL, 'Funko1', '5', 'imagenes/funko1.jpg', 'Este es el funko de harry potter', '12.95'), (NULL, 'Funko2', '9', 'imagenes/funko2.jpg', 'este es el funko de miguel de coco', '15');
+INSERT INTO `productos` (`id_productos`, `nombre`, `stock`, `ruta`, `descripcion`, `precio`) VALUES (NULL, 'Funko3', '5', 'imagenes/funko3.jpg', 'Este es el funko de owi wan', '12.95');

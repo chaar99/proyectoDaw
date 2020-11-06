@@ -1,14 +1,14 @@
 <?php
     include('conectaBDconPDO.php');
     include('Password.php');
-
-    
-    $correo = "carmenlopezcalvo.4c@gmail.com";
-    $nombre = "chaar99";
-    $ape1 = "lopez";
-    $contra = "123";    
-    $contra_hash = Password::hash($contra);
-    $dni = "02298089K";
+    $myObj = json_decode(file_get_contents('php://input'), true);
+    //$password = json_decode($_POST["password"], false);
+    print_r($myObj);
+    $correo = $myObj['correo'];
+    $nombre = $myObj['nombre'];
+    $ape1 = $myObj['apell'];
+    $contra_hash = Password::hash($myObj['password']);
+    $dni = $myObj['dni'];
 
     $tipo_u = 1;
     $obj =  conectaBD::singleton();
