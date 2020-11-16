@@ -63,3 +63,4 @@ INSERT INTO ROLES (tipo) VALUES("Cliente");
 
 INSERT INTO `productos` (`id_productos`, `nombre`, `stock`, `ruta`, `descripcion`, `precio`) VALUES (NULL, 'Funko1', '5', 'imagenes/funko1.jpg', 'Este es el funko de harry potter', '12.95'), (NULL, 'Funko2', '9', 'imagenes/funko2.jpg', 'este es el funko de miguel de coco', '15');
 INSERT INTO `productos` (`id_productos`, `nombre`, `stock`, `ruta`, `descripcion`, `precio`) VALUES (NULL, 'Funko3', '5', 'imagenes/funko3.jpg', 'Este es el funko de owi wan', '12.95');
+INSERT INTO `productos` (`id_productos`, `nombre`, `stock`, `ruta`, `descripcion`, `precio`) VALUES (NULL, 'Harry con la escoba ', '9', './img/harry-escoba.jpg', 'Este es el funko de harry potter con la escoba', '12.95'), (NULL, 'Harry Potter con mandragora', '9', './img/harry-mandragora.jpg', 'este es el funko de Harry Potter con una mandragora', '15');
