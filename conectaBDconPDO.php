@@ -71,5 +71,17 @@
 				die("Error al ejecutar orden select :" . $pe->getMessage());
 			} 
 		}
+
+		public function registroProducto($nombre,$stock,$ruta,$descipcion,$precio) { 
+			try{ 
+				//Dar de alta a un usuario
+				$sql = "INSERT INTO productos (nombre, stock, ruta, descripcion, precio) VALUES(:miNombre,:miStock,:miRuta,:miDescipcion,:miPrecio)";
+				$resultado = $this->conn->prepare($sql);
+				$resultado->execute(array( ":miNombre"=>$nombre,":miStock"=>$stock, ":miRuta"=>$ruta, ":miDescipcion"=>$descipcion,":miPrecio"=>$precio));
+
+			} catch (PDOException $pe){
+				die("Error al ejecutar orden select :" . $pe->getMessage());
+			} 
+		}
 	}
 ?>
