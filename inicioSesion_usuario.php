@@ -17,7 +17,7 @@
           // session_start();
           // $_SESSION["correo"] = $correo;
 
-            $salida = 3;
+            $salida = $correo;
             
         }else{
 
