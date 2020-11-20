@@ -9,31 +9,31 @@
     $obj =  conectaBD::singleton();
 
     $result = $obj->inicioSesion($correo);
-        
+    
     //compruebo si exixste el correo
     if( count($result) == 1){
 
         // si existe el correo compuebo la constraseña
         if(Password::verify($contra,$result[0])){
-           
             // session_start();
             // $_SESSION["correo"] = $correo;
-            $result2 = $obj->inicioSesion2($correo);
             
-            //$salida -> $correo;
+            $salida =$obj->inicioSesion2($correo);
+            
             
         }else{
 
-            $result = 0;
+            $salida = "La contraseña no es correcta";
+            
         }
 
     }else{
 
-        $result = 1;
-
+        $salida = "El correo no existe";
+        
     }
     
-    echo json_encode($result2);
+    echo json_encode($salida);
        
        
 ?>
