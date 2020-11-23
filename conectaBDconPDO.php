@@ -65,8 +65,8 @@
 				$consulta = $this->conn->prepare($consulta);
 				$consulta->execute(array(':miCorreo' =>$correo));
 			
-				$resultado = $consulta->fetch();
-				return $resultado['contrasenia'];
+				$resultado = $consulta->fetch(PDO::FETCH_NUM);
+				return $resultado;
 			} catch (PDOException $pe){
 				die("Error al ejecutar orden select :" . $pe->getMessage());
 			} 
@@ -79,6 +79,19 @@
 				$resultado = $this->conn->prepare($sql);
 				$resultado->execute(array( ":miNombre"=>$nombre,":miStock"=>$stock, ":miRuta"=>$ruta, ":miDescipcion"=>$descipcion,":miPrecio"=>$precio));
 
+			} catch (PDOException $pe){
+				die("Error al ejecutar orden select :" . $pe->getMessage());
+			} 
+		}
+
+		public function inicioSesion2($correo) { 
+			try{ 
+				$consulta = "select * from usuarios where correo=:miCorreo";
+				$consulta = $this->conn->prepare($consulta);
+				$consulta->execute(array(':miCorreo' =>$correo));
+			
+				$resultado = $consulta->fetch(PDO::FETCH_OBJ);
+				return $resultado;
 			} catch (PDOException $pe){
 				die("Error al ejecutar orden select :" . $pe->getMessage());
 			} 
