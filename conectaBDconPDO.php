@@ -30,7 +30,7 @@
 		public function __clone(){
 			trigger_error("La clonación no esta permitida", E_USER_ERROR);
 		}		
-		public function imprimir_productos() { 
+		public function imprimirProductos() { 
 			try{ 
 				$consulta = "select * from productos";
 				$consulta = $this->conn->prepare($consulta);		
@@ -42,7 +42,18 @@
 				die("Error al ejecutar orden select :" . $pe->getMessage());
 			} 
 		}
+		public function imprimirProductosFiltro($categoria) { 
+			try{ 
+				$consulta = "select * from productos where categoria=:miCategoria";
+				$consulta = $this->conn->prepare($consulta);		
+				$consulta->execute(array( ":miCategoria"=>$categoria));
 
+				$resultado = $consulta->fetchAll(PDO::FETCH_OBJ);
+				return $resultado;
+			} catch (PDOException $pe){
+				die("Error al ejecutar orden select :" . $pe->getMessage());
+			} 
+		}
 		public function registroDeUsuario($correo,$usuario,$ape,$contra,$dni,$tipo_u) { 
 			try{ 
 				//Dar de alta a un usuario
@@ -72,12 +83,12 @@
 			} 
 		}
 
-		public function registroProducto($nombre,$stock,$ruta,$descipcion,$precio) { 
+		public function registroProducto($nombre,$stock,$ruta,$descipcion,$precio,$categoria) { 
 			try{ 
 				//Dar de alta a un usuario
-				$sql = "INSERT INTO productos (nombre, stock, ruta, descripcion, precio) VALUES(:miNombre,:miStock,:miRuta,:miDescipcion,:miPrecio)";
+				$sql = "INSERT INTO productos (nombre, stock, ruta, descripcion, precio, categoria) VALUES(:miNombre,:miStock,:miRuta,:miDescipcion,:miPrecio,:miCategoria)";
 				$resultado = $this->conn->prepare($sql);
-				$resultado->execute(array( ":miNombre"=>$nombre,":miStock"=>$stock, ":miRuta"=>$ruta, ":miDescipcion"=>$descipcion,":miPrecio"=>$precio));
+				$resultado->execute(array( ":miNombre"=>$nombre,":miStock"=>$stock, ":miRuta"=>$ruta, ":miDescipcion"=>$descipcion,":miPrecio"=>$precio,"miCategoria"=>$categoria));
 
 			} catch (PDOException $pe){
 				die("Error al ejecutar orden select :" . $pe->getMessage());

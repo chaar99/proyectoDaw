@@ -8,11 +8,12 @@
     $ruta = $myObj['ruta'];
     $stock = (int)($myObj['stock']);
     $precio = (int)($myObj['precio']);
+    $categoria = $myObj['categoria'];
     $partes = explode("\\", $ruta);
     $img = $partes[2];
     $obj =  conectaBD::singleton();
 
-    $result = $obj->registroProducto($nombre,$stock,$img,$descripcion,$precio);
+    $result = $obj->registroProducto($nombre,$stock,$img,$descripcion,$precio,$categoria);
           
        
 ?>

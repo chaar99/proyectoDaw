@@ -7,6 +7,7 @@ CREATE TABLE IF NOT EXISTS PRODUCTOS(
 		ruta VARCHAR(50) NOT NULL,
 		descripcion varchar(60) NOT NULL,
 		precio int NOT NULL,
+		categoria VARCHAR(30) NOT NULL,
 		primary key (id_productos)
 	);
 

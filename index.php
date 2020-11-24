@@ -2,7 +2,7 @@
   include('conectaBDconPDO.php');
 
   $obj =  conectaBD::singleton();
-  $result = $obj->imprimir_productos();
+  $result = $obj->imprimirProductos();
 
   echo json_encode($result);
 ?>
