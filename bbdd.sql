@@ -43,18 +43,17 @@ CREATE TABLE IF NOT EXISTS PEDIDOS(
     	provincia varchar(20) NOT NULL,
     	postal_code int NOT NULL,
     	precio_t INT,
-    	PRIMARY KEY(id_pedido)
+		correo varchar(30),
+    	PRIMARY KEY(id_pedido),
+		FOREIGN KEY (correo) REFERENCES usuarios(correo)
     );
 
-CREATE TABLE IF NOT EXISTS REL_PEDIDOS_CLIENTES_PRODUCTOS(
-	id_rel int NOT NULL AUTO_INCREMENT,
+CREATE TABLE IF NOT EXISTS REL_PEDIDOS_PRODUCTOS(
 	id_pedido int NOT NULL,
-	correo varchar(30) NOT NULL,
 	id_producto int NOT NULL,
 	cantidad_products int,
-	PRIMARY KEY(id_rel),
+	PRIMARY KEY(id_pedido,id_producto),
 	FOREIGN KEY (id_pedido) REFERENCES pedidos(id_pedido),
-	FOREIGN KEY (correo) REFERENCES usuarios(correo),
 	FOREIGN KEY (id_producto) REFERENCES productos(id_productos)
 );
 

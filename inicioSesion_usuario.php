@@ -15,6 +15,7 @@
 
         // si existe el correo compuebo la constraseña
         if(Password::verify($contra,$result[0])){
+            
             // session_start();
             // $_SESSION["correo"] = $correo;
             

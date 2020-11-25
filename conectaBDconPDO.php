@@ -13,7 +13,7 @@
 			}
 		}
 		
-		//método singleton que crea instancia sí no está creada
+		// Método singleton que crea instancia sí no está creada
 		public static function singleton(){ 
 			if (!isset(self::$instancia)) {
 				$miclase = __CLASS__;
@@ -85,7 +85,7 @@
 
 		public function registroProducto($nombre,$stock,$ruta,$descipcion,$precio,$categoria) { 
 			try{ 
-				//Dar de alta a un usuario
+				//Dar de alta a un producto
 				$sql = "INSERT INTO productos (nombre, stock, ruta, descripcion, precio, categoria) VALUES(:miNombre,:miStock,:miRuta,:miDescipcion,:miPrecio,:miCategoria)";
 				$resultado = $this->conn->prepare($sql);
 				$resultado->execute(array( ":miNombre"=>$nombre,":miStock"=>$stock, ":miRuta"=>$ruta, ":miDescipcion"=>$descipcion,":miPrecio"=>$precio,"miCategoria"=>$categoria));
