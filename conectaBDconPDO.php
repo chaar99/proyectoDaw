@@ -107,5 +107,16 @@
 				die("Error al ejecutar orden select :" . $pe->getMessage());
 			} 
 		}
+
+		public function registroPedido($calle,$destalle_calle,$ciudad,$provincia,$cod_p,$precio_p,$correo) { 
+			try{ 
+				$sql = "INSERT INTO pedidos (calle, detalle_calle, ciudad, provincia, postal_code, precio_t, correo) VALUES (:miCalle, :miDetalle_calle, :miCiudad, :miProvincia, :miPostal_code, :miPrecio_t, :miCorreo)";
+				$resultado = $this->conn->prepare($sql);
+				$resultado->execute(array( ":miCalle"=>$calle,":miDetalle_calle"=>$destalle_calle, ":miCiudad"=>$ciudad, ":miProvincia"=>$provincia,":miPostal_code"=>$cod_p,"miPrecio_t"=>$precio_p,"miCorreo"=>$correo));
+
+			} catch (PDOException $pe){
+				die("Error al ejecutar orden select :" . $pe->getMessage());
+			} 
+		}
 	}
 ?>
