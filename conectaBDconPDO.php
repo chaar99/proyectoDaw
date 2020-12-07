@@ -118,5 +118,26 @@
 				die("Error al ejecutar orden select :" . $pe->getMessage());
 			} 
 		}
+
+		public function borrarProducto($id){
+			try{ 
+				$sql = "DELETE FROM productos WHERE id_productos = :miId";
+				$resultado = $this->conn->prepare($sql);
+				$resultado->execute(array( ":miId"=>$id));
+
+			} catch (PDOException $pe){
+				die("Error al ejecutar orden select :" . $pe->getMessage());
+			} 
+		}
+
+		public function comprobarStock($id){
+			try{
+				$sql = "SELECT stock FROM productos WHERE id_productos = :miId";
+				$resultado = $this->conn->prepare($sql);
+				$resultado->execute(array(":miID"=>$id));
+			}catch (PDOException $pe){
+				die("Error al ejecutar orden select :" . $pe->getMessage());
+			} 
+		}
 	}
 ?>
