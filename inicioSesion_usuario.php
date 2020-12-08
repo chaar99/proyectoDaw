@@ -12,9 +12,7 @@
 
     //compruebo si exixste el correo
     if($result == ""){
-
-        $salida = "El correo no existe";
-
+        http_response_code(205);
     }else{
         // si existe el correo compuebo la constraseña
         if(Password::verify($contra,$result[0])){
@@ -22,10 +20,9 @@
             // session_start();
             // $_SESSION["correo"] = $correo;
             $salida =$obj->inicioSesion2($correo);
+            echo json_encode($salida, JSON_UNESCAPED_UNICODE);
         }else{
-           $salida = "la contraseña es incorrecta";
+            http_response_code(205);
         }
     }
-
-    echo json_encode($salida, JSON_UNESCAPED_UNICODE);
 ?>
