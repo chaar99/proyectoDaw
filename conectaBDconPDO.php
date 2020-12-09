@@ -153,5 +153,6 @@
 				die("Error al ejecutar orden select :" . $pe->getMessage());
 			} 
 		}
+
 	}
 ?>
