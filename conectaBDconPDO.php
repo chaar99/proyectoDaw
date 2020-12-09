@@ -65,6 +65,8 @@
 				$sql = "INSERT INTO usuarios_roles (correo,idR) VALUES(:miCorreo,:miTipo)";
 				$resultado = $this->conn->prepare($sql);
 				$resultado->execute(array( ":miCorreo"=>$correo, ":miTipo"=>$tipo_u));
+
+				return $this->inicioSesion2($correo);
 			} catch (PDOException $pe){
 				die("Error al ejecutar orden select :" . $pe->getMessage());
 			} 

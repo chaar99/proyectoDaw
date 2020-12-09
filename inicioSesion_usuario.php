@@ -16,8 +16,8 @@
         // si existe el correo compuebo la constraseña
         if(Password::verify($contra,$result[0])){
             
-            // session_start();
-            // $_SESSION["correo"] = $correo;
+            session_start();
+            $_SESSION["correo"] = $correo;
             $salida =$obj->inicioSesion2($correo);
             echo json_encode($salida, JSON_UNESCAPED_UNICODE);
         }else{
