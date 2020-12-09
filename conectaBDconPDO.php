@@ -72,7 +72,7 @@
 
 		public function inicioSesion($correo) { 
 			try{ 
-				$consulta = "select contrasenia from usuarios where correo=:miCorreo ";
+				$consulta = "select count(*) from usuarios where correo=:miCorreo ";
 				$consulta = $this->conn->prepare($consulta);
 				$consulta->execute(array(':miCorreo' =>$correo));
 			
@@ -95,6 +95,18 @@
 			} 
 		}
 
+		public function comprobarProducto($ruta) { 
+			try{ 
+				$consulta = "select count(*) from productos where ruta=:miRuta ";
+				$consulta = $this->conn->prepare($consulta);
+				$consulta->execute(array(':miRuta' =>$ruta));
+				$resultado = $consulta->fetch(PDO::FETCH_NUM);
+				return $resultado;
+			} catch (PDOException $pe){
+				die("Error al ejecutar orden select :" . $pe->getMessage());
+			} 
+		}
+		
 		public function inicioSesion2($correo) { 
 			try{ 
 				$consulta = "select * from usuarios where correo=:miCorreo";

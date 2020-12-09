@@ -12,10 +12,13 @@
 
     $partes = explode("\\", $ruta);
     $img = $partes[2];
-    
-    $obj =  conectaBD::singleton();
 
-    $result = $obj->registroProducto($nombre,$stock,$img,$descripcion,$precio,$categoria);
-          
-       
+    $obj =  conectaBD::singleton();
+    $result1 = $obj->comprobarProducto($img);
+    // si no esta registrado el producto, lo da de alta
+    if ($result1[0][0] == 0) {
+        $result = $obj->registroProducto($nombre,$stock,$img,$descripcion,$precio,$categoria);
+    }else {
+        http_response_code(409);
+    }
 ?>
