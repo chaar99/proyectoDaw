@@ -72,7 +72,7 @@
 
 		public function inicioSesion($correo) { 
 			try{ 
-				$consulta = "select count(*) from usuarios where correo=:miCorreo ";
+				$consulta = "select contrasenia, count(*) from usuarios where correo=:miCorreo ";
 				$consulta = $this->conn->prepare($consulta);
 				$consulta->execute(array(':miCorreo' =>$correo));
 			
@@ -106,7 +106,7 @@
 				die("Error al ejecutar orden select :" . $pe->getMessage());
 			} 
 		}
-		
+
 		public function inicioSesion2($correo) { 
 			try{ 
 				$consulta = "select * from usuarios where correo=:miCorreo";

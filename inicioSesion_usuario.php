@@ -6,13 +6,12 @@
     $correo = $myObj['correo'];
     $contra = $myObj['password'];
     // $correo = "carmenlopezcalvo.4c@gmail.com";
-    // $contra = 1223;
+    // $contra = 1231231231;
     $obj =  conectaBD::singleton();
     $result = $obj->inicioSesion($correo);
-
     //compruebo si exixste el correo
-    if($result == ""){
-        http_response_code(205);
+    if($result[0] == ""){
+       http_response_code(205);
     }else{
         // si existe el correo compuebo la constraseña
         if(Password::verify($contra,$result[0])){
