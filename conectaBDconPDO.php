@@ -42,18 +42,7 @@
 				die("Error al ejecutar orden select :" . $pe->getMessage());
 			} 
 		}
-		public function imprimirProductosFiltro($categoria) { 
-			try{ 
-				$consulta = "select * from productos where categoria=:miCategoria";
-				$consulta = $this->conn->prepare($consulta);		
-				$consulta->execute(array( ":miCategoria"=>$categoria));
-
-				$resultado = $consulta->fetchAll(PDO::FETCH_OBJ);
-				return $resultado;
-			} catch (PDOException $pe){
-				die("Error al ejecutar orden select :" . $pe->getMessage());
-			} 
-		}
+		
 		public function registroDeUsuario($correo,$usuario,$ape,$contra,$dni,$tipo_u) { 
 			try{ 
 				//Dar de alta a un usuario
@@ -111,7 +100,11 @@
 
 		public function inicioSesion2($correo) { 
 			try{ 
-				$consulta = "select * from usuarios where correo=:miCorreo";
+				$consulta = "select u.* , rel.idR  
+				FROM usuarios u 
+				JOIN usuarios_roles rel
+				ON u.correo = rel.correo 
+				WHERE u.correo=:miCorreo";
 				$consulta = $this->conn->prepare($consulta);
 				$consulta->execute(array(':miCorreo' =>$correo));
 			
