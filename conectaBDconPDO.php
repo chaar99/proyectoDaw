@@ -32,7 +32,7 @@
 		}		
 		public function imprimirProductos() { 
 			try{ 
-				$consulta = "select * from productos";
+				$consulta = "SELECT * from productos WHERE stock > 0";
 				$consulta = $this->conn->prepare($consulta);		
 				$consulta->execute();
 
@@ -74,13 +74,13 @@
 			} 
 		}
 
-		public function registroProducto($nombre,$stock,$ruta,$descipcion,$precio,$categoria) { 
+		public function registroProducto($nombre,$stock,$ruta,$descipcion,$precio) { 
 			try{ 
 				//Dar de alta a un producto
-				$sql = "INSERT INTO productos (nombre, stock, ruta, descripcion, precio, categoria) VALUES(:miNombre,:miStock,:miRuta,:miDescipcion,:miPrecio,:miCategoria)";
+				$sql = "INSERT INTO productos (nombre, stock, ruta, descripcion, precio) VALUES(:miNombre,:miStock,:miRuta,:miDescipcion,:miPrecio)";
 				$resultado = $this->conn->prepare($sql);
-				$resultado->execute(array( ":miNombre"=>$nombre,":miStock"=>$stock, ":miRuta"=>$ruta, ":miDescipcion"=>$descipcion,":miPrecio"=>$precio,"miCategoria"=>$categoria));
-
+				$resultado->execute(array( ":miNombre"=>$nombre,":miStock"=>$stock, ":miRuta"=>$ruta, ":miDescipcion"=>$descipcion,":miPrecio"=>$precio));
+				
 			} catch (PDOException $pe){
 				die("Error al ejecutar orden select :" . $pe->getMessage());
 			} 
@@ -115,12 +115,17 @@
 			} 
 		}
 
-		public function registroPedido($calle,$destalle_calle,$ciudad,$provincia,$cod_p,$precio_p,$correo) { 
+		public function registroPedido($calle,$destalle_calle,$ciudad,$provincia,$cod_p,$precio_p) { 
 			try{ 
-				$sql = "INSERT INTO pedidos (calle, detalle_calle, ciudad, provincia, postal_code, precio_t, correo) VALUES (:miCalle, :miDetalle_calle, :miCiudad, :miProvincia, :miPostal_code, :miPrecio_t, :miCorreo)";
+				$sql = "INSERT INTO pedidos (calle, detalle_calle, ciudad, provincia, postal_code, precio_t) VALUES (:miCalle, :miDetalle_calle, :miCiudad, :miProvincia, :miPostal_code, :miPrecio_t)";
 				$resultado = $this->conn->prepare($sql);
-				$resultado->execute(array( ":miCalle"=>$calle,":miDetalle_calle"=>$destalle_calle, ":miCiudad"=>$ciudad, ":miProvincia"=>$provincia,":miPostal_code"=>$cod_p,"miPrecio_t"=>$precio_p,"miCorreo"=>$correo));
-
+				$resultado->execute(array( ":miCalle"=>$calle,":miDetalle_calle"=>$destalle_calle, ":miCiudad"=>$ciudad, ":miProvincia"=>$provincia,":miPostal_code"=>$cod_p,":miPrecio_t"=>$precio_p));
+				
+				$consulta = "SELECT id_pedido from pedidos";
+				$consulta = $this->conn->prepare($consulta);
+				$consulta->execute();
+				$resultado = $consulta->fetch(PDO::FETCH_NUM);
+				return $resultado;
 			} catch (PDOException $pe){
 				die("Error al ejecutar orden select :" . $pe->getMessage());
 			} 
@@ -141,11 +146,23 @@
 			try{
 				$sql = "SELECT stock FROM productos WHERE id_productos = :miId";
 				$resultado = $this->conn->prepare($sql);
-				$resultado->execute(array(":miID"=>$id));
+				$resultado->execute(array(":miId"=>$id));
+				$resultado = $resultado->fetch(PDO::FETCH_NUM);
+				return $resultado;
 			}catch (PDOException $pe){
 				die("Error al ejecutar orden select :" . $pe->getMessage());
 			} 
 		}
 
+		public function insertarRelacion($idP, $correo, $idPro, $canti){
+			try{
+				$sql = "INSERT INTO rel_pedidos_clientes_productos (id_pedido, correo, id_producto, cantidad_products) VALUES (:miP, :miCorreo, :miProducto, :miCant)";
+				$resultado = $this->conn->prepare($sql);
+				$resultado->execute(array( ":miP"=>$idP,":miCorreo"=>$correo, ":miProducto"=>$idPro, ":miCant"=>$canti));
+				
+			}catch (PDOException $pe){
+				die("Error al ejecutar orden select :" . $pe->getMessage());
+			} 
+		}
 	}
 ?>

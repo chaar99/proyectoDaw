@@ -9,7 +9,7 @@
     $contra_hash = Password::hash($myObj['password']);
     $dni = $myObj['dni'];
 
-    $tipo_u = 1;
+    $tipo_u = 2;
 
     $obj =  conectaBD::singleton();
     $result = $obj->inicioSesion($correo);
