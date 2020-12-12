@@ -1,5 +1,5 @@
 <?php
-	include('conectaBDconPDO.php');
+	include('./../utils/conectaBDconPDO.php');
 
     $myObj = json_decode(file_get_contents('php://input'), true);
     

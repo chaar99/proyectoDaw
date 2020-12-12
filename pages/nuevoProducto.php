@@ -1,6 +1,6 @@
 <?php 
-    include('conectaBDconPDO.php');
-    include("filtrado.php");
+    include('./../utils/conectaBDconPDO.php');
+    include("./../utils/filtrado.php");
     $myObj = json_decode(file_get_contents('php://input'), true);
     
     $nombre = Filtrado::filtrado($myObj['nombre']);

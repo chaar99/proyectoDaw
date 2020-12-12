@@ -1,5 +1,5 @@
 <?php
-  include('conectaBDconPDO.php');
+  include('utils/conectaBDconPDO.php');
 
   $obj =  conectaBD::singleton();
   $result = $obj->imprimirProductos();
